@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet href="analyse.xsl" type="text/xsl" ?>
+
+<polygon>
+	<etage niveau="-1">
+		<magasin type="alimentaire" nom="Inno">
+                    <x>210</x>
+                    <y>60</y>
+                </magasin>                    
+		<magasin type="vestinaire" nom="Zara">
+                    <x>130</x>
+                    <y>80</y>
+                </magasin>
+		<magasin type="culturel" nom="Cult">
+                    <x>290</x>
+                    <y>135</y>
+                </magasin>
+	</etage>
+	<etage niveau="0">
+		<magasin type="alimentaire" nom="Magdo">
+                    <x>140</x>
+                    <y>60</y>
+                </magasin>
+		<magasin type="vestinaire" nom="Berska">
+                    <x>200</x>
+                    <y>125</y>
+                </magasin>
+		<magasin type="culturel" nom="Sauramps">
+                    <x>290</x>
+                    <y>90</y>
+                </magasin>
+	</etage>
+	<etage niveau="1">
+		<magasin type="alimentaire" nom="Flunch">
+                    <x>195</x>
+                    <y>220</y>
+                </magasin>
+		<magasin type="vestinaire" nom="Celio">
+                    <x>95</x>
+                    <y>230</y>
+                </magasin>
+                <magasin type="alimentaire" nom="KFC">
+                    <x>295</x>
+                    <y>230</y>
+                </magasin>
+		<magasin type="vestinaire" nom="Chanel">
+                    <x>195</x>
+                    <y>60</y>
+                </magasin>
+	</etage>
+	<etage niveau="2">
+		<magasin type="alimentaire" nom="Kebap">
+                    <x>95</x>
+                    <y>155</y>
+                </magasin>
+		<magasin type="vestinaire" nom="Jules">
+                    <x>50</x>
+                    <y>135</y>
+                </magasin>
+                <magasin type="alimentaire" nom="MCdonalds">
+                    <x>40</x>
+                    <y>40</y>
+                </magasin>
+		<magasin type="vestinaire" nom="HugoBoss">
+                    <x>90</x>
+                    <y>90</y>
+                </magasin>
+	</etage>
+</polygon>

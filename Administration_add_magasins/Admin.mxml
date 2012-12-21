@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   xmlns:composants="composants.*"
+			   creationComplete="initApp()" >
+	
+	<fx:Script>
+		<![CDATA[			
+			public function initApp():void {
+				//panel.height=maGrille.getLargeur()+50;
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<mx:Label text="Topologie" color="#0000FF" fontSize="18" />
+	
+
+		<composants:Grille id="maGrille"/>
+
+</s:WindowedApplication>

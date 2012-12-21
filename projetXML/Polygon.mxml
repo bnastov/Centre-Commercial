@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="300" minHeight="300"
+			   creationComplete="intiApp()">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			import mx.containers.Canvas;
+			import mx.containers.Panel;
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.controls.Label;
+			import mx.controls.Text;
+			import mx.events.FlexEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.components.Button;
+			
+			protected function intiApp():void{
+				serv.send();
+			}
+			
+			protected function serv_resultHandler(event:ResultEvent):void
+			{				
+				//La fonction appele par le HTTPservice
+				var xml:XML = XML(event.result);				
+				var donnees:XMLList = xml..etage;
+				//Pour chaque etage on cree un panneau ou on va afficher les magasins
+				for each(var donnee:XML in donnees){
+					creePanel(donnee.@niveau, xml);
+				}
+			}			
+			
+			protected function creePanel(x:String , xml:XML):void{
+				//La fonction qui cree le paneau
+				var panel:Panel = new Panel();
+				panel.label = "Etage : "+ x;
+				panel.title = "Etage : "+x;
+				
+				//On va dessiner le plan + les magasins dans le canvas
+				var dessin:Canvas = new Canvas();
+				var image:Image = new Image();
+				if(x == "-1" || x == "0"){
+					image.source="plan1.png";
+				}
+				else{
+					image.source="plan2.png";
+				}
+				image.height = 300;
+				image.width = 300;
+				dessin.addChild(image);				
+				
+				var donnees:XMLList = xml.etage.(@niveau == x).magasin;
+				for each(var donnee:XML in donnees){
+					//texte sert a nommer les magasins
+					var texte:Text = new Text();
+					texte.text = donnee.@nom;
+					texte.x = donnee.x;
+					texte.y = donnee.y;
+					//On deplace le texte de 10px pour eviter la colisions avec le button 
+					texte.y+=7;
+					//on represente les magasins avec des buttons, on associe une action lors du click qui affiche le nom + type de magasin
+					var magasin:Button = new Button();
+					magasin.label = donnee.@nom;
+					magasin.name = donnee.@type;					
+					magasin.addEventListener(MouseEvent.CLICK, ShowMagasin);
+					magasin.x = donnee.x.toString();
+					magasin.y = donnee.y.toString();
+					magasin.width = 10;
+					magasin.height = 10;
+					//Ajout dans le canvas
+					dessin.addChild(magasin);
+					dessin.addChild(texte);
+				}			
+				panel.addChild(dessin);				
+				viewStack.addChild(panel);
+			}
+			
+			protected function ShowMagasin(event:MouseEvent):void{								
+				Alert.show("Vous avez coisit le magasin "+event.currentTarget.label+"qui est un magasin "+event.currentTarget.name);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:HTTPService id="serv" url="result.xml" resultFormat="e4x" result="serv_resultHandler(event)"/>
+	</fx:Declarations>
+	
+	
+	<mx:VBox>
+		<mx:LinkBar  dataProvider="{viewStack}"/>
+		<mx:ViewStack id="viewStack"/>
+	</mx:VBox>
+</s:Application>
